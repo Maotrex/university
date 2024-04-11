@@ -1,94 +1,86 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-class alumno
+class Escuela
 {
-
 private:
-    string nombre;
-    string apellido;
+    string nombre, apellido, titulo;
     float matricula;
     int edad;
     char sexo;
 
 public:
-    alumno(); // constructor
+    Escuela(int edad, const string &nombre, const string &apellido, const string &titulo, float &matricula, const char &sexo)
+        : edad(edad), nombre(nombre), apellido(apellido), matricula(matricula), sexo(sexo), titulo(titulo) {} // constructor
 
-    void registrar()
+    string getnombre() const
     {
-        cout << "Ingrese el Nombre del alumno: ";
-        getline(cin, nombre);
-
-        cout << "Ingrese Apellido: ";
-        getline(cin, apellido);
-
-        cout << "Ingrese su Edad: ";
-        cin >> edad;
-
-        cout << "Ingrese su sexo ";
-        cin >> sexo;
-
-        cout << "Ingrese su Número de Matrícula: ";
-        cin >> matricula;
-    };
-
-    void ver_registro()
-    {
-
-        string respuesta;
-        cout << "desea ver su información de registro?: [si/no]";
-        if (respuesta == "si")
-        {
-
-            cout << "su nombre es: "
-                 << nombre << endl;
-
-            cout << "su apellido es: "
-                 << apellido << endl;
-
-            cout << "su edad es: "
-                 << edad << endl;
-
-            cout << "Genero [Masuculino: M / Femenino: F]"
-                 << sexo << endl;
-        }
+        return nombre; // nombre
     }
+
+    void setnombre(string nuevoNombre)
+    {
+        nombre = nuevoNombre;
+    }
+
+    string getapellido() const
+    {
+        return apellido; // apellido
+    }
+
+    void setapellido(string nuevoApellido)
+    {
+        apellido = nuevoApellido;
+    }
+    float getmatricula() const
+    {
+        return matricula;
+    }
+
+    void setmatricula(float nuevaMatricula)
+    {
+        matricula = nuevaMatricula; // matricula
+    }
+    int getedad() const
+    {
+        return edad;
+    }
+
+    void setedad(int nuevaEdad)
+    {
+        edad = nuevaEdad; // edad
+    }
+    char getsexo() const
+    {
+        return sexo;
+    }
+
+    void setSexo(char nuevoSexo)
+    {
+        sexo = nuevoSexo; // sexo
+    }
+    string gettitulo() const
+    {
+        return titulo;
+    }
+
+    void setTitulo(string nuevoTitulo)
+    {
+        titulo = nuevoTitulo; // titulo
+    };
 };
 
-class profesor
+class registro : public Escuela
 {
-
 private:
-    string nombre;
-    string apellido;
-    string titulo_academico;
-    int edad;
-    char sexo;
-    float cedula_profesional;
-
 public:
-    profesor(); // constructor
-    void registrar();
-    void ver_registro();
 };
-
-class materia
-{
-
-private:
-    string nombre;
-    int cuatrimestre;
-    float no_de_creditos;
-
-public:
-    materia();
-    void registrar();
-    void ver_registro();
-};
-
+}
 int main()
 {
 
