@@ -95,6 +95,9 @@ void Empleado::imprimir()
 int main()
 {
 
-    Persona p1;
-    p1.imprimir();
+    Cliente cliente1;
+    cliente1.imprimir();
+
+    Empleado empleado1;
+    empleado1.imprimir();
 };
