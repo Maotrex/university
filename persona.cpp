@@ -7,24 +7,21 @@ using namespace std;
 // CLASES
 class Persona
 {
-private:
-    std::string nombre, apellido;
-    int edad;
-
 public:
+    string nombre, apellido;
+    int edad;
+    // metodos persona
     Persona();
-    // AGREGAR METODOS SETTERS Y GETTERS
     virtual void imprimir();
 };
 
 class Cliente : public Persona
 {
-private: // atributos class "cliente"
+public: // atributos class "cliente"
     string address;
     string creditcardInfo;
     float accountBalance;
-
-public:        // metodos
+    // metodos cliente
     Cliente(); // Constructor
     void imprimir();
 };
@@ -32,12 +29,19 @@ public:        // metodos
 class Empleado : public Persona
 {
 private:
-    int id_empleado, salario;
-    string empresa;
+    int salario;
 
 public:
-    Empleado();
+    int id_empleado;
+    string empresa;
+    // Metodos empleado
+    Empleado(int salario);
     void imprimir();
+    void setSalario(int _salario)
+    {
+        if (salario < 0 || salario > 4000)
+            salario = _salario;
+    }
 };
 
 // METODOS Y CONSTRUCTORES
@@ -45,8 +49,6 @@ Persona::Persona(){};
 void Persona::imprimir()
 {
 
-    cout << "**************************** \n";
-    cout << "******** Registro ********** \n";
     cout << "Ingrese su nombre: ";
     // elimina todos los espacios que puedan ser acarreados de la impresion anterior.
     cin >> ws;
@@ -57,14 +59,16 @@ void Persona::imprimir()
 
     cout << "Ingrese su edad: ";
     std::cin >> edad;
-    cin.ignore();
 };
 
 Cliente::Cliente() : Persona() {}
 void Cliente::imprimir()
 {
-    imprimir();
+    cout << "*********************************\n";
+    cout << "******** Info. Cliente ********** \n";
+    Persona::imprimir();
     cin.ignore();
+
     cout << "Ingrese su direccion: ";
     getline(cin, address);
 
@@ -76,28 +80,34 @@ void Cliente::imprimir()
     cin.ignore();
 }
 
-Empleado::Empleado() : Persona() {}
+Empleado::Empleado(int salario) : Persona(), salario(0) { setSalario(salario); }
 void Empleado::imprimir()
 {
-    imprimir();
+    cout << "**********************************\n";
+    cout << "******** Info. Empleado ********** \n";
+    Persona::imprimir();
     cin.ignore();
+
     cout << "Ingrese el numero ID del empleado:" << endl;
     cin >> id_empleado;
     cin.ignore();
-    cout << "Ingrese el salario base del empleado:" << endl;
+
+    cout << "Ingrese el salario inicial del empleado:" << endl;
     cin >> salario;
     cin.ignore();
-    cout << "ingrese la empresa del empleado" << endl;
+
+    cout << "ingrese la empresa a la que pertenece el empleado" << endl;
     getline(cin, empresa);
 }
 
 // MAIN FUNCTION
 int main()
 {
+    Persona *vector[2];
+    vector[0] = new Cliente();
+    vector[1] = new Empleado(4000);
 
-    Cliente cliente1;
-    cliente1.imprimir();
-
-    Empleado empleado1;
-    empleado1.imprimir();
+    vector[0]->imprimir();
+    cout << "\n";
+    vector[1]->imprimir();
 };
