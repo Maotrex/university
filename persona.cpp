@@ -39,9 +39,12 @@ public:
     void imprimir();
     void setSalario(int _salario)
     {
-        if (salario < 0 || salario > 4000)
+        if (salario > 0 && salario < 4000)
             salario = _salario;
+        else
+            cout << "Salario Invalido";
     }
+    int getSalario();
 };
 
 // METODOS Y CONSTRUCTORES
@@ -99,13 +102,17 @@ void Empleado::imprimir()
     cout << "ingrese la empresa a la que pertenece el empleado" << endl;
     getline(cin, empresa);
 }
+int Empleado ::getSalario()
+{
+    return salario;
+}
 
 // MAIN FUNCTION
 int main()
 {
     Persona *vector[2];
     vector[0] = new Cliente();
-    vector[1] = new Empleado(4000);
+    vector[1] = new Empleado(0);
 
     vector[0]->imprimir();
     cout << "\n";
