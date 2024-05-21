@@ -7,225 +7,183 @@
 
 using namespace std;
 
-class Alumno
+class Persona
 {
-
 public:
-    int id;
-    string nuevoNombre, nuevoApellido, nuevaMatricula;
-    char nuevoSexo;
-    int nuevaEdad;
-    Alumno();
-
-    void registro()
-    {
-        cout << "---- Registro Alumno ----" << endl;
-        cout << "Ingrese su Id:";
-        std::cin >> id; // int
-        cin.ignore();
-
-        cout << "Ingrese su Nombre:";
-        std::getline(std::cin, nuevoNombre);
-
-        cout << "Ingrese su Apellido:";
-        getline(cin, nuevoApellido);
-
-        cout << "Ingrese su matricula:";
-        getline(cin, nuevaMatricula); // string
-
-        cout << "Ingrese su sexo [M/F]:";
-        std::cin >> nuevoSexo;
-
-        cout << "Ingrese su edad:";
-        std::cin >> nuevaEdad; // int
-        cin.ignore();
-    };
-
-    void mostrar()
-    {
-        cout << "**************************** \n";
-        cout << "---------- Alumno ----------" << endl;
-        cout << "**************************** \n";
-        cout << "ID: \n"
-             << id << endl;
-        cout << "Nombre: \n"
-             << nuevoNombre << endl;
-        cout << "Apellido: \n"
-             << nuevoApellido << endl;
-        cout << "Matricula: \n"
-             << nuevaMatricula << endl;
-        cout << "Sexo: \n"
-             << nuevoSexo << endl;
-        cout << "Edad: \n"
-             << nuevaEdad << endl;
-    };
+    int id, edad;
+    string nombre, apellido, matricula;
+    char sexo;
+    Persona();
+    virtual void registro();
+    virtual void mostrar();
 };
 
-Alumno::Alumno()
+Persona::Persona() {} // CONSTRUCTOR PERSONA
+void Persona::registro()
 {
+    cout << "Ingrese su Id:";
+    std::cin >> id; // int
+    cin.ignore();
+
+    cout << "Ingrese su Nombre:";
+    std::getline(std::cin, nombre);
+
+    cout << "Ingrese su Apellido:";
+    getline(cin, apellido);
+
+    cout << "Ingrese su Edad:";
+    std::cin >> edad;
+
+    cout << "Ingrese su sexo [M/F]:";
+    std::cin >> sexo;
+};
+void Persona::mostrar()
+{
+    cout << "ID: \n"
+         << id << endl;
+    cout << "Nombre: \n"
+         << nombre << endl;
+    cout << "Apellido: \n"
+         << apellido << endl;
+    cout << "Sexo: \n"
+         << sexo << endl;
+    cout << "Edad: \n"
+         << edad << endl;
 }
+
+class Alumno : public Persona
+{
+public:
+    string matricula;
+    Alumno();
+    void registro_alumno();
+    void mostrar_alumno();
+};
+
+Alumno::Alumno() : Persona() {} // CONSTRUCTOR
+void Alumno::registro_alumno()
+{
+
+    cout << "---- Registro Alumno ----" << endl;
+    registro();
+    cout << "Ingrese su matricula:";
+    getline(cin, matricula);
+    cin.ignore();
+};
+void Alumno::mostrar_alumno()
+{
+    cout << "**************************** \n";
+    cout << "---------- Alumno ----------" << endl;
+    cout << "**************************** \n";
+    mostrar();
+    cout << "matricula: " << matricula << endl;
+};
 
 class Materia
 {
 public:
+    string nombre_materia;
     int id;
-    string matricula, nombre_materia;
     Materia(); // Constructor
+    void registro_materia();
+    void mostrar_materia();
+};
+Materia::Materia() {} // Constructor
+void Materia::registro_materia()
+{
+    cout << "---- Registro Materia ----" << endl;
 
-    void setnombre_materia(string nuevoNombre_materia)
-    {
-        nombre_materia = nuevoNombre_materia;
-    }
+    cout << "Ingrese su Id:";
+    std::cin >> id; // int
+    cin.ignore();
 
-    string getnombre_materia() const
-    {
-
-        return nombre_materia;
-    }
-
-    void setmatricula(float nuevaMatricula)
-    {
-        matricula = nuevaMatricula;
-    }
-
-    string getmatricula() const
-    {
-
-        return matricula;
-    }
-
-    void registro()
-    {
-        cout << "---- Registro Materia ----" << endl;
-
-        cout << "Ingrese su Id:";
-        std::cin >> id; // int
-        cin.ignore();
-
-        cout << "ingrese su numero de matricula" << endl;
-        std::getline(cin, matricula);
-
-        cout << "Ingrese el Nombre de la materia:";
-        std::getline(cin, nombre_materia);
-    };
-
-    void mostrar()
-    {
-        cout << "**************************** \n";
-        cout << "---------- Materia----------" << endl;
-        cout << "**************************** \n";
-        cout << "ID: \n"
-             << id << endl;
-        cout << "Matricula: \n"
-             << matricula << endl;
-        cout << "Nombre Materia: \n"
-             << nombre_materia << endl;
-    };
+    cout << "Ingrese el Nombre de la materia:";
+    std::getline(cin, nombre_materia);
 };
 
-Materia::Materia()
+void Materia::mostrar_materia()
 {
-}
+    cout << "**************************** \n";
+    cout << "---------- Materia----------" << endl;
+    cout << "**************************** \n";
+    cout << "ID: \n"
+         << id << endl;
+    cout << "Nombre Materia: \n"
+         << nombre_materia << endl;
+};
 
-class Profesor
+class Profesor : public Persona
 {
 public:
-    int id;
-    string nombre, apellido, titulo;
-    char sexo;
-    int edad;
-
+    string titulo;
     Profesor();
-
-    void registro()
-    {
-        cout << "---- Registro Profesor ----" << endl;
-        cout << "Ingrese su Id:";
-        std::cin >> id; // int
-        cin.ignore();
-
-        cout << "Ingrese su Nombre:";
-        std::getline(std::cin, nombre);
-
-        cout << "Ingrese su Apellido:";
-        getline(cin, apellido);
-
-        cout << "Ingrese su Titulo:";
-        getline(cin, titulo);
-
-        cout << "Ingrese su sexo [M/F]:";
-        std::cin >> sexo;
-
-        cout << "Ingrese su edad:";
-        std::cin >> edad; // int
-        cin.ignore();
-    };
-
-    void mostrar()
-    {
-        cout << "**************************** \n";
-        cout << "--------- Profesor --------" << endl;
-        cout << "**************************** \n";
-        cout << "ID: \n"
-             << id << endl;
-        cout << "Nombre: \n"
-             << nombre << endl;
-        cout << "Apellido: \n"
-             << apellido << endl;
-        cout << "Titulo: \n"
-             << titulo << endl;
-        cout << "Matricula: \n"
-             << sexo << endl;
-        cout << "Sexo: \n"
-             << edad << endl;
-    };
+    void registro_profesor();
+    void mostrar_profesor();
+};
+Profesor::Profesor() : Persona() {}
+void Profesor::registro_profesor()
+{
+    cout << "---- Registro Profesor ----" << endl;
+    registro();
+    cin.ignore();
+    cout << "Ingrese su Titulo:";
+    getline(cin, titulo);
 };
 
-Profesor::Profesor()
+void Profesor::mostrar_profesor()
 {
-}
+    cout << "**************************** \n";
+    cout << "--------- Profesor --------" << endl;
+    cout << "**************************** \n";
+    mostrar();
+    cout << "Titulo: \n"
+         << titulo << endl;
+};
 
 int main()
 {
     Alumno alumno1;
     Alumno alumno2;
+    Alumno alumno3;
 
     Profesor profesor1;
     Profesor profesor2;
+    Profesor profesor3;
 
     Materia materia1;
     Materia materia2;
     Materia materia3;
+    Materia materia4;
 
     int menu_respuesta;
     int id_a_consultar;
 
-    const int num_profesores = 2;
-    const int num_alumnos = 2;
-    const int num_materias = 3;
+    const int num_profesores = 3;
+    const int num_alumnos = 3;
+    const int num_materias = 4;
 
     Profesor profesores[num_profesores] = {
-        profesor1, profesor2};
+        profesor1, profesor2, profesor3};
 
     for (int i = 0; i < num_profesores; i++)
     {
-        profesores[i].registro();
+        profesores[i].registro_profesor();
     }
 
     Materia materias[num_materias] = {
-        materia1, materia2, materia3};
+        materia1, materia2, materia3, materia4};
 
     for (int i = 0; i < num_materias; i++)
     {
-        materias[i].registro();
+        materias[i].registro_materia();
     }
 
     Alumno alumnos[num_alumnos] = {
-        alumno1, alumno2};
+        alumno1, alumno2, alumno3};
 
     for (int i = 0; i < num_alumnos; i++)
     {
-        alumnos[i].registro();
+        alumnos[i].registro_alumno();
     }
 
     do
@@ -251,7 +209,7 @@ int main()
                 if (profesores[i].id == id_a_consultar)
                 {
 
-                    profesores[i].mostrar();
+                    profesores[i].mostrar_profesor();
                 }
             }
             break;
@@ -265,7 +223,7 @@ int main()
                 if (materias[i].id == id_a_consultar)
                 {
 
-                    materias[i].mostrar();
+                    materias[i].mostrar_materia();
                 }
             }
             break;
@@ -279,7 +237,7 @@ int main()
                 if (alumnos[i].id == id_a_consultar)
                 {
 
-                    alumnos[i].mostrar();
+                    alumnos[i].mostrar_alumno();
                 }
             }
             break;
